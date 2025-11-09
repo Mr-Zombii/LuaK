@@ -6,6 +6,7 @@ import me.zombii.luak.ffi.NativeAPI
 import me.zombii.luak.util.LuaState
 import me.zombii.luak.util.LuaStateConverter
 import java.io.File
+import java.nio.file.Files
 import java.util.*
 
 object LuaK {
@@ -38,10 +39,17 @@ object LuaK {
     }
 
     private fun createLibLoader(): LibraryLoader<NativeAPI> {
-        val dir = File(System.getProperty("user.home"), ".luaK")
+        val dir = Files.createTempDirectory(".luaK").toFile()
+        println(dir)
         dir.mkdirs()
-        cpyBin(dir, "lua.dll")
-        cpyBin(dir, "liblua.so")
+
+        val osName = System.getProperty("os.name").lowercase(Locale.getDefault())
+        if(osName.contains("windows")) {
+            cpyBin(dir, "lua.dll")
+        } else if(osName.contains("linux")) {
+            cpyBin(dir, "liblua.so")
+        }
+
 
         return LibraryLoader.create(NativeAPI::class.java).mapper(LuaStateConverter.INSTANCE)
         .mapper(TypeMapper.Builder().map(LuaState::class.java, LuaStateConverter.INSTANCE).build())
