@@ -2,13 +2,6 @@
 import jnr.ffi.Struct
 import jnr.ffi.provider.LoadedLibrary
 import me.zombii.luak.LuaK
-import me.zombii.luak.ffi.LUA.lua_pushnumber
-import me.zombii.luak.ffi.LUA.lua_setfield
-import me.zombii.luak.ffi.LUALIB_API.luaL_requiref
-import me.zombii.luak.ffi.LUALIB_API_MACRO.luaL_setfuncs_impl
-import me.zombii.luak.ffi.LUA_MACRO.lua_pop
-import me.zombii.luak.ffi.LUA_MACRO.lua_pushglobaltable
-import me.zombii.luak.ffi.LUA_MACRO.lua_tonumber
 import me.zombii.luak.java.HelloWorld
 import me.zombii.luak.lua.conv.ClassConverter
 import me.zombii.luak.lua.conv.StaticObject
@@ -17,7 +10,7 @@ import me.zombii.luak.types.structs.LuaL_Reg
 import me.zombii.luak.util.LuaState
 import kotlin.math.sin
 
-object Test2 {
+object Test {
 
     @JvmStatic
     fun main(args: Array<String>) {
